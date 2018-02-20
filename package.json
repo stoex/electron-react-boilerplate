@@ -1,0 +1,54 @@
+{
+  "name": "electron-react-boilerplate",
+  "description": "A basic Electron.js / React.js boilerplate for rapid development and easy app deployment.",
+  "version": "0.1.0",
+  "private": false,
+  "author": {
+    "name": "Christian Nicola",
+    "email": "c.nicola89@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "./",
+  "dependencies": {
+    "electron-devtools-installer": "^2.2.3"
+  },
+  "main": "public/electron.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build-client": "babel electron-src -d public && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "dev": "set BROWSER=none && babel electron-src -d public && concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "electron-builder build/main.js",
+    "preelectron-pack": "yarn build"
+  },
+  "build": {
+    "appId": "com.company.appid",
+    "productName": "%APPNAME%",
+    "copyright": "%COPYRIGHT%",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "build-assets"
+    }
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
+    "electron": "^1.8.2",
+    "electron-builder": "^20.0.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1",
+    "wait-on": "^2.1.0"
+  }
+}
